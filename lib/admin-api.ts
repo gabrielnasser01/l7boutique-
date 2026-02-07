@@ -44,7 +44,7 @@ export const adminApi = {
   async writeBrand(data: Record<string, unknown>, brandId?: string | null) {
     const { data: result, error } = await supabase.rpc('admin_brands_write', {
       p_admin_id: getAdminId(),
-      p_operation: brandId ? 'update' : 'insert',
+      p_operation: brandId ? 'update' : 'create',
       p_brand_id: brandId || null,
       p_data: data,
     });
@@ -65,7 +65,7 @@ export const adminApi = {
   async writeCategory(data: Record<string, unknown>, categoryId?: string | null) {
     const { data: result, error } = await supabase.rpc('admin_categories_write', {
       p_admin_id: getAdminId(),
-      p_operation: categoryId ? 'update' : 'insert',
+      p_operation: categoryId ? 'update' : 'create',
       p_category_id: categoryId || null,
       p_data: data,
     });
@@ -86,7 +86,7 @@ export const adminApi = {
   async writeCollection(data: Record<string, unknown>, collectionId?: string | null) {
     const { data: result, error } = await supabase.rpc('admin_collections_write', {
       p_admin_id: getAdminId(),
-      p_operation: collectionId ? 'update' : 'insert',
+      p_operation: collectionId ? 'update' : 'create',
       p_collection_id: collectionId || null,
       p_data: data,
     });
