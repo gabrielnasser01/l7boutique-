@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+@layer base {
+  :root {
+    --background: 40 10% 95%;
+    --foreground: 0 0% 3%;
+    --card: 40 10% 95%;
+    --card-foreground: 0 0% 3%;
+    --popover: 40 10% 95%;
+    --popover-foreground: 0 0% 3%;
+    --primary: 0 0% 3%;
+    --primary-foreground: 40 10% 95%;
+    --secondary: 40 8% 88%;
+    --secondary-foreground: 0 0% 3%;
+    --muted: 40 8% 88%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 43 52% 54%;
+    --accent-foreground: 0 0% 3%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 40 8% 82%;
+    --input: 40 8% 82%;
+    --ring: 43 52% 54%;
+    --radius: 0px;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased select-none;
+    font-family: 'Inter', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', serif;
+  }
+  a, button {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  input, textarea, select {
+    @apply select-text;
+  }
+}
+
+@layer utilities {
+  .font-serif {
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .font-sans {
+    font-family: 'Inter', sans-serif;
+  }
+  .tracking-boutique {
+    letter-spacing: 0.25em;
+  }
+  .tracking-wide-boutique {
+    letter-spacing: 0.35em;
+  }
+  .duration-400 {
+    transition-duration: 400ms;
+  }
+}
+
+::selection {
+  background-color: #C8A24D;
+  color: #070707;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F4F2EE;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C8A24D33;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C8A24D66;
+}
+
+@media (hover: hover) {
+  .group:hover .group-hover\:translate-y-0 {
+    transform: translateY(0);
+  }
+}
