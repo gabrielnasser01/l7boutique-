@@ -1,11 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
 import { createCheckoutLink } from '@/lib/infinitepay';
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+import { getSupabase } from '@/lib/supabase';
 
 interface ItemInput {
   quantity: number;
@@ -15,6 +10,7 @@ interface ItemInput {
 
 export async function POST(req: NextRequest) {
   try {
+    const supabase = getSupabase();
     const body = await req.json();
     const { orderId, items } = body as { orderId?: string; items?: ItemInput[] };
 
