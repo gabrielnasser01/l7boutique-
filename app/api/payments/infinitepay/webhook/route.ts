@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSupabase } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase';
 
 export async function POST(req: NextRequest) {
   try {
-    const supabase = getSupabase();
     const payload = await req.json();
 
     const orderNsu = payload.order_nsu || payload.orderNsu || payload.nsu;

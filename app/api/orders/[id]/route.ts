@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSupabase } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase';
 
 export async function GET(
   _req: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
-    const supabase = getSupabase();
     const { data: order } = await supabase.rpc('public_get_order_basic', { p_order_id: params.id });
 
     if (!order) {

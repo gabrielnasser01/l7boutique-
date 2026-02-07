@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { checkPaymentStatus } from '@/lib/infinitepay';
-import { getSupabase } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase';
 
 export async function POST(req: NextRequest) {
   try {
-    const supabase = getSupabase();
     const body = await req.json();
     const { orderId, transactionNsu, slug } = body as {
       orderId?: string;
