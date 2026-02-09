@@ -26,7 +26,10 @@ export function CategoriesSection() {
   return (
     <section className="max-w-[1400px] mx-auto px-6 lg:px-10 py-20 lg:py-28">
       <div className="text-center mb-14">
-        <p className="text-[10px] tracking-wide-boutique font-sans text-gold mb-3 uppercase">Curadoria</p>
+        <div className="flex flex-col items-center mb-3">
+          <span className="text-2xl font-serif font-semibold text-gold leading-none">L7</span>
+          <span className="text-[7px] tracking-wide-boutique font-sans text-gold/60 uppercase">Boutique</span>
+        </div>
         <h2 className="text-3xl lg:text-4xl font-serif text-charcoal font-light">Categorias</h2>
       </div>
 
