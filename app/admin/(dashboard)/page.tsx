@@ -39,12 +39,12 @@ export default function AdminDashboard() {
 
   const stats = useMemo(() => {
     const activeOrders = orders.filter((o) => o.status !== 'cancelled');
-    const totalRevenue = activeOrders
-      .filter((o) => o.payment_status === 'paid')
-      .reduce((sum, o) => sum + Number(o.total), 0);
+    const paidOrders = activeOrders.filter((o) => o.payment_status === 'paid');
+    const totalRevenue = paidOrders.reduce((sum, o) => sum + Number(o.total), 0);
     const totalOrders = activeOrders.length;
-    const avgTicket = totalOrders > 0 ? totalRevenue / totalOrders : 0;
-    const uniqueCustomers = new Set(activeOrders.map((o) => o.customer_id)).size;
+    const paidOrdersCount = paidOrders.length;
+    const avgTicket = paidOrdersCount > 0 ? totalRevenue / paidOrdersCount : 0;
+    const uniqueCustomers = new Set(paidOrders.map((o) => o.customer_id)).size;
     const pendingOrders = orders.filter((o) => o.status === 'pending').length;
     const shippedOrders = orders.filter((o) => o.status === 'shipped').length;
     return { totalRevenue, totalOrders, avgTicket, uniqueCustomers, pendingOrders, shippedOrders };
