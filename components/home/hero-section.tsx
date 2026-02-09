@@ -16,6 +16,11 @@ const FALLBACK_SLIDES = [
 export function HeroSection() {
   const [current, setCurrent] = useState(0);
   const [slides, setSlides] = useState(FALLBACK_SLIDES);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     supabase.from('site_images').select('*').eq('section', 'hero').order('sort_order').then(({ data }) => {
@@ -45,7 +50,7 @@ export function HeroSection() {
       <AnimatePresence mode="wait">
         <motion.div
           key={current}
-          initial={{ opacity: 0, scale: 1.05 }}
+          initial={mounted ? { opacity: 0, scale: 1.05 } : false}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
@@ -65,7 +70,7 @@ export function HeroSection() {
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
-            initial={{ opacity: 0, y: 30 }}
+            initial={mounted ? { opacity: 0, y: 30 } : false}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.8, delay: 0.3 }}
