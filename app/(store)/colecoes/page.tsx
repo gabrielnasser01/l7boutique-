@@ -25,7 +25,7 @@ export default function CollectionsPage() {
     <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-10 lg:py-16">
       <div className="mb-10 lg:mb-14">
         <p className="text-[10px] tracking-wide-boutique font-sans text-gold mb-3 uppercase">Explorar</p>
-        <h1 className="text-3xl lg:text-4xl font-serif text-charcoal font-light">Colecoes</h1>
+        <h1 className="text-3xl lg:text-4xl font-serif text-charcoal font-light">Coleções</h1>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
@@ -46,7 +46,7 @@ export default function CollectionsPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-charcoal/10 to-transparent" />
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-7 lg:p-10">
-                <p className="text-[9px] tracking-wide-boutique font-sans text-gold mb-2 uppercase">COLECAO</p>
+                <p className="text-[9px] tracking-wide-boutique font-sans text-gold mb-2 uppercase">COLEÇÃO</p>
                 <h2 className="text-2xl lg:text-3xl font-serif text-ivory mb-2">{col.name}</h2>
                 <p className="text-[13px] font-sans text-ivory/50 mb-4 max-w-sm">{col.description}</p>
                 <span className="inline-flex items-center gap-2 text-[10px] tracking-boutique font-sans text-ivory/60 group-hover:text-ivory transition-colors uppercase">

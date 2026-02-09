@@ -29,7 +29,7 @@ export function CollectionsBanner() {
     <section className="max-w-[1400px] mx-auto px-6 lg:px-10 py-20 lg:py-28 border-t border-charcoal/8">
       <div className="text-center mb-14">
         <p className="text-[10px] tracking-wide-boutique font-sans text-gold mb-3 uppercase">Explorar</p>
-        <h2 className="text-3xl lg:text-4xl font-serif text-charcoal font-light">Colecoes</h2>
+        <h2 className="text-3xl lg:text-4xl font-serif text-charcoal font-light">Coleções</h2>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
@@ -51,7 +51,7 @@ export function CollectionsBanner() {
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-charcoal/10 to-transparent" />
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-7">
-                <p className="text-[9px] tracking-wide-boutique font-sans text-gold mb-2 uppercase">COLECAO</p>
+                <p className="text-[9px] tracking-wide-boutique font-sans text-gold mb-2 uppercase">COLEÇÃO</p>
                 <h3 className="text-xl font-serif text-ivory mb-3">{col.name}</h3>
                 <span className="inline-flex items-center gap-2 text-[10px] tracking-boutique font-sans text-ivory/60 group-hover:text-ivory transition-colors uppercase">
                   EXPLORAR
