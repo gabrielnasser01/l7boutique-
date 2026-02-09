@@ -1,31 +1,51 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { Search, ShoppingBag, User, Menu } from 'lucide-react';
+import { Search, ShoppingBag, User, Menu, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '@/contexts/cart-context';
+import { supabase } from '@/lib/supabase';
 import { MobileMenu } from './mobile-menu';
 import { SearchOverlay } from './search-overlay';
 
-const NAV_LINKS = [
-  { href: '/loja', label: 'LOJA' },
-  { href: '/pronta-entrega', label: 'PRONTA ENTREGA' },
-  { href: '/colecoes', label: 'COLEÇÕES' },
-  { href: '/faq', label: 'FAQ' },
-];
+interface Brand {
+  id: string;
+  name: string;
+  slug: string;
+}
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [brandsOpen, setBrandsOpen] = useState(false);
+  const [brands, setBrands] = useState<Brand[]>([]);
   const { openCart, totalItems } = useCart();
+  const dropdownTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    async function loadBrands() {
+      const { data } = await supabase.from('brands').select('id, name, slug').order('name');
+      if (data) setBrands(data);
+    }
+    loadBrands();
+  }, []);
+
+  const handleDropdownEnter = () => {
+    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
+    setBrandsOpen(true);
+  };
+
+  const handleDropdownLeave = () => {
+    dropdownTimeout.current = setTimeout(() => setBrandsOpen(false), 150);
+  };
 
   return (
     <>
@@ -52,15 +72,70 @@ export function Header() {
             </button>
 
             <div className="hidden lg:flex items-center gap-10">
-              {NAV_LINKS.map((link) => (
+              <Link
+                href="/loja"
+                className="relative text-[11px] tracking-boutique font-sans text-gold/80 hover:text-gold transition-colors duration-300 py-2 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-gold/50 after:transition-all after:duration-500 hover:after:w-full"
+              >
+                LOJA
+              </Link>
+              <Link
+                href="/pronta-entrega"
+                className="relative text-[11px] tracking-boutique font-sans text-gold/80 hover:text-gold transition-colors duration-300 py-2 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-gold/50 after:transition-all after:duration-500 hover:after:w-full"
+              >
+                PRONTA ENTREGA
+              </Link>
+              <div
+                className="relative"
+                onMouseEnter={handleDropdownEnter}
+                onMouseLeave={handleDropdownLeave}
+              >
                 <Link
-                  key={link.href}
-                  href={link.href}
-                  className="relative text-[11px] tracking-boutique font-sans text-gold/80 hover:text-gold transition-colors duration-300 py-2 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-gold/50 after:transition-all after:duration-500 hover:after:w-full"
+                  href="/colecoes"
+                  className="relative flex items-center gap-1.5 text-[11px] tracking-boutique font-sans text-gold/80 hover:text-gold transition-colors duration-300 py-2 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-gold/50 after:transition-all after:duration-500 hover:after:w-full"
                 >
-                  {link.label}
+                  MARCAS
+                  <ChevronDown size={12} strokeWidth={1.5} className={`transition-transform duration-300 ${brandsOpen ? 'rotate-180' : ''}`} />
                 </Link>
-              ))}
+                <AnimatePresence>
+                  {brandsOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 pt-3"
+                    >
+                      <div className="bg-charcoal border border-ivory/10 min-w-[180px] py-3 shadow-xl shadow-black/30">
+                        {brands.map((brand) => (
+                          <Link
+                            key={brand.id}
+                            href={`/loja?marca=${brand.slug}`}
+                            onClick={() => setBrandsOpen(false)}
+                            className="block px-6 py-2.5 text-[11px] tracking-boutique font-sans text-ivory/60 hover:text-gold hover:bg-ivory/5 transition-all duration-200"
+                          >
+                            {brand.name.toUpperCase()}
+                          </Link>
+                        ))}
+                        <div className="border-t border-ivory/8 mt-2 pt-2">
+                          <Link
+                            href="/colecoes"
+                            onClick={() => setBrandsOpen(false)}
+                            className="block px-6 py-2.5 text-[11px] tracking-boutique font-sans text-gold/50 hover:text-gold transition-all duration-200"
+                          >
+                            VER TODAS
+                          </Link>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+              <Link
+                href="/faq"
+                className="relative text-[11px] tracking-boutique font-sans text-gold/80 hover:text-gold transition-colors duration-300 py-2 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-gold/50 after:transition-all after:duration-500 hover:after:w-full"
+              >
+                FAQ
+              </Link>
             </div>
 
             <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center gap-3 hover:opacity-80 transition-opacity duration-300">
