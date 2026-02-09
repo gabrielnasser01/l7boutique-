@@ -35,7 +35,7 @@ export function Header() {
         }`}
       >
         <div className={`overflow-hidden transition-all duration-500 ease-in-out flex items-center justify-center bg-charcoal border-b border-ivory/8 ${scrolled ? 'h-0 opacity-0' : 'h-8 opacity-100'}`}>
-          <p className="text-ivory/50 text-[10px] tracking-boutique font-sans uppercase whitespace-nowrap">
+          <p className="text-ivory/50 text-[8px] sm:text-[10px] tracking-boutique font-sans uppercase whitespace-nowrap">
             Pecas originais com garantia de autenticidade &mdash; Parcele em ate 6x sem juros
           </p>
         </div>
