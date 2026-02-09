@@ -1,3 +1,5 @@
+'use client';
+
 import { CartProvider } from '@/contexts/cart-context';
 import { UserAuthProvider } from '@/contexts/user-auth-context';
 import { ErrorBoundary } from '@/components/error-boundary';
