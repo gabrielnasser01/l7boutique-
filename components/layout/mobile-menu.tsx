@@ -21,7 +21,6 @@ const MENU_SECTIONS: MenuSection[] = [
       { href: '/loja?categoria=tenis', label: 'Tenis' },
       { href: '/loja?categoria=casacos', label: 'Casacos' },
       { href: '/loja?categoria=tricos', label: 'Tricos' },
-      { href: '/loja?categoria=alfaiataria', label: 'Alfaiataria' },
       { href: '/loja?categoria=camisas', label: 'Camisas' },
       { href: '/loja?categoria=calcas', label: 'Calcas' },
       { href: '/loja?categoria=acessorios', label: 'Acessorios' },
@@ -40,7 +39,6 @@ const MENU_SECTIONS: MenuSection[] = [
     label: 'COLECOES',
     items: [
       { href: '/colecoes/inverno-2025', label: 'Inverno 2025' },
-      { href: '/colecoes/alfaiataria', label: 'Alfaiataria' },
       { href: '/colecoes/essenciais', label: 'Essenciais' },
       { href: '/colecoes/outerwear', label: 'Outerwear' },
     ],

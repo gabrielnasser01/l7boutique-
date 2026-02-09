@@ -14,6 +14,7 @@ export function CategoriesSection() {
       const { data } = await supabase
         .from('categories')
         .select('*')
+        .neq('slug', 'alfaiataria')
         .order('sort_order');
       if (data) setCategories(data);
     }
